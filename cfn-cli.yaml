@@ -1,0 +1,39 @@
+Version: 3
+Blueprints:
+  Default:
+    Region: us-east-1
+    Capabilities: [CAPABILITY_IAM,CAPABILITY_NAMED_IAM]
+
+Stages:
+  # Stage name, must match[a-zA-Z][-a-zA-Z0-9]{0,127}
+  Default:
+    Order: 1
+
+    # Stack name, each stack is qualified by stage_name.stack_name
+    # StageName.StackName is "qualified" name for a stack in the configuration file.
+    # Output of a stack can be referenced by any parameter value in another stack config.
+    # This is very handy if two stacks are in different accounts and/or regions.
+    # To reference stack output "FooBar", use "${StageName.StackName.FooBar}"
+    VPC:
+      Extends: Default
+      StackName: VpcSpringCS
+      Template: Templates/VPC.yaml
+      StackPolicy: ALLOW_ALL
+      OnFailure: DO_NOTHING
+      Parameters:
+        VpcNetworkParam: 10.0.0.0/16
+        PrivateAZ2SubnetBlock: 10.0.100.0/24
+        PrivateAZ1SubnetBlock: 10.0.0.0/24
+        PublicAZ1SubnetBlock:  10.0.1.0/24
+        PublicAZ2SubnetBlock:  10.0.10.0/24  
+            
+        
+ #       EC2KeyName: proserve
+ #       VpcID: vpc-08a0a34aca55619ba
+ #       Subnets: subnet-08d09f88b4706b3d5, subnet-0fdfb3d94debc7a6b
+ #       PipelineName: JavaPipeline
+ #       CodeRepository: captcha-service
+ #       CreateApplication: 'true'
+        # ArtifactStore: codepipeline-us-east-1-002019942508
+
+        
