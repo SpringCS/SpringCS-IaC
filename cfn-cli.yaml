@@ -22,10 +22,12 @@ Stages:
       OnFailure: DO_NOTHING
       Parameters:
         VpcNetworkParam: 10.0.0.0/16
-        PrivateAZ2SubnetBlock: 10.0.100.0/24
-        PrivateAZ1SubnetBlock: 10.0.0.0/24
-        PublicAZ1SubnetBlock:  10.0.1.0/24
-        PublicAZ2SubnetBlock:  10.0.10.0/24  
+        PublicSubNetAZ1Block: 10.0.0.0/24
+        PublicSubNetAZ2Block: 10.0.100.0/24
+        ProcessSubNetAZ1Block:  10.0.1.0/24
+        ProcessSubNetAZ2Block:  10.0.10.0/24
+        DataSubNetAZ1Block:  10.0.2.0/24
+        DataSubNetAZ2Block:  10.0.20.0/24
 
     WebApp:
       Extends: Default
