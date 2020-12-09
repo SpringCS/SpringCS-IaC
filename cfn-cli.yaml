@@ -26,6 +26,15 @@ Stages:
         PrivateAZ1SubnetBlock: 10.0.0.0/24
         PublicAZ1SubnetBlock:  10.0.1.0/24
         PublicAZ2SubnetBlock:  10.0.10.0/24  
+
+    WebApp:
+      Extends: Default
+      StackName: WebAppSpringCS
+      Template: Templates/WebApp.yaml
+      StackPolicy: ALLOW_ALL
+      OnFailure: DO_NOTHING
+      Parameters:
+        S3BucketWebApp: webapp-springcs-demo
             
         
  #       EC2KeyName: proserve

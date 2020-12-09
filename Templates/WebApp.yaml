@@ -1,0 +1,69 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: >-
+  This stack deploys the WebApp to Springfield Car Share Solution.
+  
+Parameters:
+    S3BucketWebApp:
+        Type: String
+        Description: "NoMbre del bucket"
+        
+Resources:
+    S3Bucket:
+     Type: 'AWS::S3::Bucket'
+#    DeletionPolicy: Retain
+     Properties:
+      BucketName: !Ref S3BucketWebApp
+      
+    S3BucketPolicy:
+      Type: "AWS::S3::BucketPolicy"
+      Properties:
+        Bucket: !Ref S3BucketWebApp
+        PolicyDocument:
+          Statement:
+          - Effect: "Allow"
+            Action: "s3:GetObject"
+            Resource: 
+              - !Sub arn:aws:s3:::${S3BucketWebApp}/*
+            Principal:
+              AWS: !Sub "arn:aws:iam::cloudfront:user/CloudFront Origin Access Identity ${Cloudfrontoriginaccessidentity}"
+      
+  
+    Cloudfrontoriginaccessidentity:
+      Type: AWS::CloudFront::CloudFrontOriginAccessIdentity
+      Properties:
+        CloudFrontOriginAccessIdentityConfig:
+            Comment: string-value  
+            
+    Cloudfrontdistribution:
+      Type: AWS::CloudFront::Distribution
+      Properties: 
+        DistributionConfig:
+          DefaultCacheBehavior:
+            AllowedMethods:
+              - 'HEAD'
+              - 'GET'
+            CachedMethods:
+              - 'HEAD'
+              - 'GET'
+            Compress: false
+            DefaultTTL: 86400
+            ForwardedValues:
+              Cookies:
+                Forward: 'none'
+              Headers:
+                - 'Origin'
+              QueryString: false
+            MaxTTL: 31536000
+            MinTTL: 86400
+            TargetOriginId: !Sub 's3-origin-${S3Bucket}'
+            ViewerProtocolPolicy: 'redirect-to-https'
+          DefaultRootObject: 'index.html'
+          Enabled: true
+          HttpVersion: 'http1.1'
+          IPV6Enabled: false
+          Origins:
+            - DomainName: !GetAtt S3Bucket.DomainName
+              Id: !Sub 's3-origin-${S3Bucket}'
+              OriginPath: ''
+              S3OriginConfig:
+                OriginAccessIdentity: !Sub 'origin-access-identity/cloudfront/${Cloudfrontoriginaccessidentity}'
