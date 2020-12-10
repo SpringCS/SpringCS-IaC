@@ -36,11 +36,11 @@ Resources:
       MasterUserPassword: !Ref DBPassword
       DBClusterIdentifier: SpringCS-cluster
       Engine: aurora-mysql
-      EngineVersion: 5.6.10a
+#EngineVersion: 5.6.10a
       EngineMode: serverless
       VpcSecurityGroupIds: 
         - !Ref DataDBSecGroup
-      DBSubnetGroupName: myDBSubnetGroup
+      DBSubnetGroupName: !Ref myDBSubnetGroup
       ScalingConfiguration:
         AutoPause: true
         MinCapacity: 2

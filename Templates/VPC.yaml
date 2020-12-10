@@ -313,29 +313,6 @@ Resources:
         - Key: Name
           Value: DataDBSecGroup
 
-#  SpringCSALB:
-#    Type: AWS::ElasticLoadBalancingV2::LoadBalancer
-#    Properties:
-#      Name: SpringCSALB
-#      Subnets: 
-#        - !Ref PublicSubNetAZ1
-#        - !Ref PublicSubNetAZ2
-#      SecurityGroups:
-#        - !Ref PublicSecgroup
-#      Tags:
-#        - Key: Name
-#          Value: SpringCSALB
-#  LoadBalancerListener:
-#    Type: AWS::ElasticLoadBalancingV2::Listener
-#    Properties:
-#      LoadBalancerArn: !Ref SpringCSALB
-#      Port: 80
-#      Protocol: HTTP
-#      DefaultActions:
-#        - Type: forward
-
-  
-
 
 Outputs:
   CurrentRegion:

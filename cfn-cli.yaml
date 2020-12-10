@@ -44,7 +44,7 @@ Stages:
       Template: Templates/Acceso.yaml
       StackPolicy: ALLOW_ALL
       OnFailure: DO_NOTHING        
-    
+
     CICD:
       Extends: Default
       StackName: DevCICD
@@ -56,7 +56,11 @@ Stages:
         GitHubBranch: main
         GitHubToken: SantiHernandez123
         GitHubUser: SpringCS
-        Cluster: SpringCSECS
+        VPC: vpc-05f0d4b39147c6275
+        SubnetProccA: subnet-0e047b74fe1fcc42b
+        SubnetProccB: subnet-05bd81031cad7d180
+        SubnetPublicA: subnet-06950f4fdfddb2586
+        SubnetPublicB: subnet-03f520157905ce752
   
     MobileDB:
       Extends: Default
@@ -67,6 +71,6 @@ Stages:
       Parameters:
         DBUsername: admin
         DBPassword: Q1w2e3r4
-        ProcessSubNetAZ1: 
-        ProcessSubNetAZ2:
-        DataDBSecGroup:
+        ProcessSubNetAZ1: subnet-03b74bc69f71c792f
+        ProcessSubNetAZ2: subnet-028633f0afa41195c
+        DataDBSecGroup: sg-0c10d7cb05c686c5e

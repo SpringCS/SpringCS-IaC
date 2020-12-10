@@ -46,6 +46,7 @@ Resources:
     Type: AWS::ApiGatewayV2::Integration
     Properties:
       ApiId: !Ref HttpApi
+      PayloadFormatVersion: 1.0
       IntegrationMethod: GET
       IntegrationType: HTTP_PROXY
       IntegrationUri: http://SpringCS-ALB-885298817.ca-central-1.elb.amazonaws.com
