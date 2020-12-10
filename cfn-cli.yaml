@@ -36,8 +36,29 @@ Stages:
       StackPolicy: ALLOW_ALL
       OnFailure: DO_NOTHING
       Parameters:
-        S3BucketWebApp: webapp-springcs-demo
-            
+        S3BucketWebApp: webapp-springcs-bck
+    
+    Acceso:
+      Extends: Default
+      StackName: WebAppSpringCS
+      Template: Templates/Acceso.yaml
+      StackPolicy: ALLOW_ALL
+      OnFailure: DO_NOTHING        
+    
+    CICD:
+      Extends: Default
+      StackName: WebAppSpringCS
+      Template: Templates/WebApp.yaml
+      StackPolicy: ALLOW_ALL
+      OnFailure: DO_NOTHING
+      Parameters:
+        GitHubRepo: https://github.com/SpringCS/Springcs
+        GitHubBranch: main
+        GitHubToken: SantiHernandez123
+        GitHubUser: SpringCS
+        Cluster: SpringCSECS
+        
+        
         
  #       EC2KeyName: proserve
  #       VpcID: vpc-08a0a34aca55619ba
