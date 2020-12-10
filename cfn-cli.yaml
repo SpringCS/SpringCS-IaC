@@ -40,15 +40,15 @@ Stages:
     
     Acceso:
       Extends: Default
-      StackName: WebAppSpringCS
+      StackName: AccesoCS
       Template: Templates/Acceso.yaml
       StackPolicy: ALLOW_ALL
       OnFailure: DO_NOTHING        
     
     CICD:
       Extends: Default
-      StackName: WebAppSpringCS
-      Template: Templates/WebApp.yaml
+      StackName: DevCICD
+      Template: Templates/CICD.yaml
       StackPolicy: ALLOW_ALL
       OnFailure: DO_NOTHING
       Parameters:
@@ -57,15 +57,16 @@ Stages:
         GitHubToken: SantiHernandez123
         GitHubUser: SpringCS
         Cluster: SpringCSECS
-        
-        
-        
- #       EC2KeyName: proserve
- #       VpcID: vpc-08a0a34aca55619ba
- #       Subnets: subnet-08d09f88b4706b3d5, subnet-0fdfb3d94debc7a6b
- #       PipelineName: JavaPipeline
- #       CodeRepository: captcha-service
- #       CreateApplication: 'true'
-        # ArtifactStore: codepipeline-us-east-1-002019942508
-
-        
+  
+    MobileDB:
+      Extends: Default
+      StackName: MobileDB
+      Template: Templates/MobileApp.yaml
+      StackPolicy: ALLOW_ALL
+      OnFailure: DO_NOTHING
+      Parameters:
+        DBUsername: admin
+        DBPassword: Q1w2e3r4
+        ProcessSubNetAZ1: 
+        ProcessSubNetAZ2:
+        DataDBSecGroup:
