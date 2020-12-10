@@ -1,7 +1,7 @@
 Version: 3
 Blueprints:
   Default:
-    Region: us-east-1
+    Region: us-east-2
     Capabilities: [CAPABILITY_IAM,CAPABILITY_NAMED_IAM]
 
 Stages:
