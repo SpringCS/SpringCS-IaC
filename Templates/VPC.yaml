@@ -333,7 +333,7 @@ Resources:
       Protocol: HTTP
       DefaultActions:
         - Type: forward
-          TargetGroupArn: !Ref ProcessSecGroup
+
   
 
 
